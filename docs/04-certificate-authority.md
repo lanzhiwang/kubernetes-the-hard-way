@@ -1,10 +1,10 @@
-# Provisioning a CA and Generating TLS Certificates
+# Provisioning a CA and Generating TLS Certificates  配置CA并生成TLS证书
 
-In this lab you will provision a [PKI Infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) using CloudFlare's PKI toolkit, [cfssl](https://github.com/cloudflare/cfssl), then use it to bootstrap a Certificate Authority, and generate TLS certificates for the following components: etcd, kube-apiserver, kube-controller-manager, kube-scheduler, kubelet, and kube-proxy.
+In this lab you will provision a [PKI Infrastructure](https://en.wikipedia.org/wiki/Public_key_infrastructure) using CloudFlare's PKI toolkit, [cfssl](https://github.com/cloudflare/cfssl), then use it to bootstrap a Certificate Authority, and generate TLS certificates for the following components: etcd, kube-apiserver, kube-controller-manager, kube-scheduler, kubelet, and kube-proxy.  在本实验中，您将使用CloudFlare的PKI工具包[cfssl]配置[PKI Infrastructure]，然后使用它来引导证书颁发机构，并为以下组件生成TLS证书：etcd，kube-apiserver，kube-controller-manager， kube-scheduler，kubelet和kube-proxy。
 
 ## Certificate Authority
 
-In this section you will provision a Certificate Authority that can be used to generate additional TLS certificates.
+In this section you will provision a Certificate Authority that can be used to generate additional TLS certificates.  在本节中，您将配置一个可用于生成其他TLS证书的证书颁发机构。
 
 Generate the CA configuration file, certificate, and private key:
 
@@ -107,7 +107,7 @@ admin.pem
 
 ### The Kubelet Client Certificates
 
-Kubernetes uses a [special-purpose authorization mode](https://kubernetes.io/docs/admin/authorization/node/) called Node Authorizer, that specifically authorizes API requests made by [Kubelets](https://kubernetes.io/docs/concepts/overview/components/#kubelet). In order to be authorized by the Node Authorizer, Kubelets must use a credential that identifies them as being in the `system:nodes` group, with a username of `system:node:<nodeName>`. In this section you will create a certificate for each Kubernetes worker node that meets the Node Authorizer requirements.
+Kubernetes uses a [special-purpose authorization mode](https://kubernetes.io/docs/admin/authorization/node/) called Node Authorizer, that specifically authorizes API requests made by [Kubelets](https://kubernetes.io/docs/concepts/overview/components/#kubelet). In order to be authorized by the Node Authorizer, Kubelets must use a credential that identifies them as being in the `system:nodes` group, with a username of `system:node:<nodeName>`. In this section you will create a certificate for each Kubernetes worker node that meets the Node Authorizer requirements.  Kubernetes使用称为节点授权器的[特殊用途授权模式]，专门授权[Kubelets]发出的API请求。 为了获得Node Authorizer的授权，Kubelets必须使用一个凭证来识别它们在`system：nodes`组中，用户名为`system：node：<nodeName>`。 在本节中，您将为每个符合节点授权者要求的Kubernetes工作节点创建证书。
 
 Generate a certificate and private key for each Kubernetes worker node:
 
@@ -292,7 +292,7 @@ kube-scheduler.pem
 
 ### The Kubernetes API Server Certificate
 
-The `kubernetes-the-hard-way` static IP address will be included in the list of subject alternative names for the Kubernetes API Server certificate. This will ensure the certificate can be validated by remote clients.
+The `kubernetes-the-hard-way` static IP address will be included in the list of subject alternative names for the Kubernetes API Server certificate. This will ensure the certificate can be validated by remote clients.  “kubernetes-the-hard-way”静态IP地址将包含在Kubernetes API服务器证书的主题备用名称列表中。 这将确保远程客户端可以验证证书。
 
 Generate the Kubernetes API Server certificate and private key:
 
@@ -342,7 +342,7 @@ kubernetes.pem
 
 ## The Service Account Key Pair
 
-The Kubernetes Controller Manager leverages a key pair to generate and sign service account tokens as describe in the [managing service accounts](https://kubernetes.io/docs/admin/service-accounts-admin/) documentation.
+The Kubernetes Controller Manager leverages a key pair to generate and sign service account tokens as describe in the [managing service accounts](https://kubernetes.io/docs/admin/service-accounts-admin/) documentation.  Kubernetes Controller Manager利用密钥对生成和签署服务帐户令牌，如[管理服务帐户]文档中所述。
 
 Generate the `service-account` certificate and private key:
 
